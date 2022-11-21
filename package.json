@@ -1,0 +1,21 @@
+{
+  "name": "vladilen_nodejs",
+  "version": "1.0.0",
+  "description": "node-js-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "hi"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "notes"
+  ],
+  "author": "Artemiusz <artemiuszkuzniecow@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@types/yargs": "^17.0.13",
+    "chalk": "^5.1.2",
+    "yargs": "^17.6.2"
+  }
+}
