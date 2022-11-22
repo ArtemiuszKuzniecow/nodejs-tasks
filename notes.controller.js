@@ -18,6 +18,12 @@ async function addNote(title) {
   //   console.log(chalk.green.inverse("Note was added"));
 }
 
+async function deleteNote(id) {
+  const notes = await getNotes();
+  const newNotes = notes.filter((n) => n.id !== id);
+  await fs.writeFile(notesPath, JSON.stringify(newNotes));
+}
+
 async function getNotes() {
   const notes = await fs.readFile(notesPath, { encoding: "utf-8" });
   return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : [];
@@ -31,4 +37,6 @@ async function printNotes() {
 module.exports = {
   addNote,
   printNotes,
+  getNotes,
+  deleteNote,
 };
