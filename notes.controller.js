@@ -34,6 +34,21 @@ async function printNotes() {
   notes.forEach((note) => console.log(note.title));
 }
 
+async function editNotes(id, payload) {
+  const notes = await getNotes();
+  const newNotes = notes.map((n) => {
+    if (n.id === id) {
+      return {
+        title: payload,
+        id: id,
+      };
+    } else {
+      return n;
+    }
+  });
+  await fs.writeFile(notesPath, JSON.stringify(newNotes));
+}
+
 module.exports = {
   addNote,
   printNotes,
