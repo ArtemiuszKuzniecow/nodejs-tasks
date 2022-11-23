@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-// const chalk = require("chalk");
+// const chalk = require("chalk"); -- This lib does not work with "require"
 
 const notesPath = path.join(__dirname, "db.json");
 
@@ -15,7 +15,13 @@ async function addNote(title) {
   notes.push(note);
 
   await fs.writeFile(notesPath, JSON.stringify(notes));
-  //   console.log(chalk.green.inverse("Note was added"));
+  //   console.log(chalk.green.inverse("Note was added")); -- This lib does not work with "require"
+}
+
+async function deleteNote(id) {
+  const notes = await getNotes();
+  const newNotes = notes.filter((n) => n.id !== id);
+  await fs.writeFile(notesPath, JSON.stringify(newNotes));
 }
 
 async function getNotes() {
@@ -25,10 +31,15 @@ async function getNotes() {
 
 async function printNotes() {
   const notes = await getNotes();
-  notes.forEach((note) => console.log(note.title));
+  console.log(
+    `Here is the list of notes: ${notes
+      .map((note, i) => i + 1 + ")" + note.id + " " + note.title)
+      .join("; ")}`
+  );
 }
 
 module.exports = {
   addNote,
   printNotes,
+  deleteNote,
 };
