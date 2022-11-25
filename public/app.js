@@ -4,11 +4,12 @@ document.addEventListener("click", (event) => {
     remove(id).then(() => event.target.closest("li").remove());
   } else if (event.target.dataset.type === "edit") {
     const id = event.target.dataset.id;
-
     const text =
       event.target.parentNode.parentNode.childNodes[0].textContent.trim();
     const value = prompt("Edit", text);
-    console.log(id, value);
+    edit(id, value).then(() => {
+      event.target.parentNode.parentNode.childNodes[0].textContent = value;
+    });
   }
 });
 
@@ -21,6 +22,7 @@ async function remove(id) {
 async function edit(id, payload) {
   const data = await fetch(`/${id}`, {
     method: "PUT",
-    body: payload,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title: payload }),
   });
 }

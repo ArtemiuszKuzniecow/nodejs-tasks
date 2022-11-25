@@ -1,6 +1,11 @@
 const express = require("express");
 const path = require("path");
-const { addNote, getNotes, deleteNote } = require("./notes.controller");
+const {
+  addNote,
+  getNotes,
+  deleteNote,
+  editNotes,
+} = require("./notes.controller");
 
 const port = 3000;
 const app = express();
@@ -31,6 +36,15 @@ app.delete("/:id", async (req, res) => {
 
 app.post("/", async (req, res) => {
   await addNote(req.body.title);
+  res.render("index", {
+    title: "Express App",
+    notes: await getNotes(),
+    created: true,
+  });
+});
+
+app.put("/:id", async (req, res) => {
+  const content = await editNotes(req.params.id, req.body.title);
   res.render("index", {
     title: "Express App",
     notes: await getNotes(),
