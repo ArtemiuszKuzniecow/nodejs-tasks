@@ -4,10 +4,12 @@ document.addEventListener("click", (event) => {
     remove(id).then(() => event.target.closest("li").remove());
   } else if (event.target.dataset.type === "edit") {
     const id = event.target.dataset.id;
-    const title = e.target.closest("div").previousElementSibling.value;
-    const value = prompt("Edit", text);
+    const title =
+      event.target.parentNode.parentNode.childNodes[0].textContent.trim();
+    const value = prompt("Edit", title);
+    console.log(title);
     edit(id, value).then(() => {
-      title = value;
+      event.target.parentNode.parentNode.childNodes[0].textContent = value;
     });
   }
 });

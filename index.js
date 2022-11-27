@@ -23,6 +23,7 @@ app.get("/", async (req, res) => {
     notes: await getNotes(),
     created: false,
   });
+});
 
 app.delete("/:id", async (req, res) => {
   await deleteNote(req.params.id);
