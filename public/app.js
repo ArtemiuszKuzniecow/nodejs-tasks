@@ -6,11 +6,12 @@ document.addEventListener("click", (event) => {
     const id = event.target.dataset.id;
     const title =
       event.target.parentNode.parentNode.childNodes[0].textContent.trim();
-    const value = prompt("Edit", title);
-    console.log(title);
-    edit(id, value).then(() => {
-      event.target.parentNode.parentNode.childNodes[0].textContent = value;
-    });
+    console.log(event.target.textContent);
+    // const value = prompt("Edit", title);
+    // console.log(title);
+    // edit(id, value).then(() => {
+    //   event.target.parentNode.parentNode.childNodes[0].textContent = value;
+    // });
   }
 });
 
