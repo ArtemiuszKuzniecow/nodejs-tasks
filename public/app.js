@@ -7,7 +7,6 @@ document.addEventListener("click", (event) => {
     const title =
       event.target.parentNode.parentNode.childNodes[0].textContent.trim();
     const value = prompt("Edit", title);
-    console.log(title);
     edit(id, value).then(() => {
       event.target.parentNode.parentNode.childNodes[0].textContent = value;
     });
